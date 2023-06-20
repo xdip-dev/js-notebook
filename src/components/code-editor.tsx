@@ -1,42 +1,33 @@
-import { editor } from 'monaco-editor';
 import './code-editor.css'
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel'
 import { useRef } from "react";
-// import codeShift from 'jscodeshift';
-// import Highlighter from 'monaco-jsx-highlighter'
+// import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
+// import {parse} from "@babel/parser";
+// import traverse from "@babel/traverse";
+// import monaco from 'monaco-editor';
 
 interface CodeEditorProps {
     initialValue:string;
     onChange(value:string):void
 }
-// EditorDidMount
 const CodeEditor:React.FC<CodeEditorProps> = ({initialValue,onChange}) => {
 
     const editorRef = useRef<any>()
-
+    
     const onMount:OnMount = (editor,monaco) => {
-      editorRef.current = editor
+        editorRef.current = editor
+
+            // TODO
+    //     const monacoJSXHighlighter = new MonacoJSXHighlighter(
+    //     monaco, parse, traverse, monaco
+    //     );
+    //  // Activate highlighting (debounceTime default: 100ms)
+    //     monacoJSXHighlighter.highlightOnDidChangeModelContent();
+    //  // Activate JSX commenting
+    //     monacoJSXHighlighter.addJSXCommentCommand();
       
-    }
-
-    const onEditorDidMount =(getValue:()=> string,monacoEditor:any) => {
-        editorRef.current = monacoEditor
-        monacoEditor.onDidChangeModelContent(() => {
-            onChange(getValue());
-        })
-        monacoEditor.getModel()?.updateOptions({tabSize:2})
-
-        // const highlighter = new Highlighter(
-        //     //@ts-ignore
-        //     window.monaco,
-        //     codeShift,
-        //     monacoEditor
-        // );
-
-        // highlighter.highLightOndidChangeModelContent();
-
     }
 
     const onFormatClick = () => {
@@ -64,7 +55,7 @@ const CodeEditor:React.FC<CodeEditorProps> = ({initialValue,onChange}) => {
             onChange={(value) => onChange(value as string)}
             theme='vs-dark'
             language="javascript"
-            height="500px"
+            height="100%"
             options={{
 
                 wordWrap: "on",
