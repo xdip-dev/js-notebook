@@ -1,5 +1,5 @@
 import './text-editor.css'
-import MDEditor, { ContextStore } from '@uiw/react-md-editor';
+import MDEditor from '@uiw/react-md-editor';
 import { useEffect, useRef, useState } from 'react';
 interface Props {}
 const TextEditor: React.FC<Props> = () => {
@@ -9,7 +9,7 @@ const TextEditor: React.FC<Props> = () => {
 
     useEffect(() => {
         const listener = (event: MouseEvent) => {
-            console.log(event.target);
+            // console.log(event.target);
 
             if (
                 ref.current &&
