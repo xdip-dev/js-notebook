@@ -33,6 +33,7 @@ export const cellReducer = createSlice({
             state.data[id].content = content;
         },
         cellDeleted(state, action: PayloadAction<string>) {
+            //TODO: probleme crash app           
             delete state.data[action.payload];
             state.order.filter((id) => id !== action.payload);
         },

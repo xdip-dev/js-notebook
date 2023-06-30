@@ -1,11 +1,19 @@
-import './text-editor.css'
+import './text-editor.css';
 import MDEditor from '@uiw/react-md-editor';
 import { useEffect, useRef, useState } from 'react';
-interface Props {}
-const TextEditor: React.FC<Props> = () => {
+import { Cell } from '../state/cell';
+import { useAppDispatch } from '../state/store';
+import { cellUpdated } from '../state/feature/cellSlice';
+
+interface TextEditorProps {
+    cell: Cell;
+}
+
+const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
     const ref = useRef<HTMLDivElement | null>(null);
-    const [value, setValue] = useState('# Header');
     const [editing, setEditing] = useState(false);
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         const listener = (event: MouseEvent) => {
@@ -28,7 +36,12 @@ const TextEditor: React.FC<Props> = () => {
     if (editing) {
         return (
             <div className="text-editor" ref={ref}>
-                <MDEditor value={value} onChange={(v)=>setValue(v || '')} />
+                <MDEditor
+                    value={cell.content || 'Click to edit'}
+                    onChange={(value) =>
+                        dispatch(cellUpdated({ id: cell.id, content: value || '' }))
+                    }
+                />
             </div>
         );
     }
@@ -39,12 +52,11 @@ const TextEditor: React.FC<Props> = () => {
                 setEditing(true);
             }}
         >
-            <div className='card-content'>
-
-            <MDEditor.Markdown
-                source={value}
-                style={{ whiteSpace: 'pre-wrap' }}
-            />
+            <div className="card-content">
+                <MDEditor.Markdown
+                    source={cell.content}
+                    style={{ whiteSpace: 'pre-wrap' }}
+                />
             </div>
         </div>
     );
