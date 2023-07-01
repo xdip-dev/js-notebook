@@ -1,7 +1,7 @@
 // import { ActionType } from '../action-types';
 // import { Action } from '../actions';
 import { Cell, CellTypes } from '../cell';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice,  PayloadAction } from '@reduxjs/toolkit';
 import { Direction } from '../direction';
 
 interface CellsStates {
@@ -22,7 +22,6 @@ const initialState: CellsStates = {
 
 export const cellReducer = createSlice({
     name: 'cellReducer',
-    // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
         cellUpdated(
@@ -33,14 +32,13 @@ export const cellReducer = createSlice({
             state.data[id].content = content;
         },
         cellDeleted(state, action: PayloadAction<string>) {
-            //TODO: probleme crash app           
             delete state.data[action.payload];
-            state.order.filter((id) => id !== action.payload);
+            state.order = state.order.filter((id) => id !== action.payload);
         },
         cellMoved(
             state,
             action: PayloadAction<{ id: string; direction: Direction }>
-        ) {
+            ) {
             const { direction } = action.payload;
             const index = state.order.findIndex(
                 (id) => id === action.payload.id
@@ -51,6 +49,7 @@ export const cellReducer = createSlice({
             }
             state.order[index] = state.order[targetIndex];
             state.order[targetIndex] = action.payload.id;
+
         },
         cellInsertedBefore(
             state,

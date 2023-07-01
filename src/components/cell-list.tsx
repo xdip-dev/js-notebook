@@ -1,5 +1,6 @@
-import { cellInsertedBefore } from "../state/feature/cellSlice";
-import { useAppDispatch, useAppSelector } from "../state/store";
+import { Fragment } from "react";
+import { useAppSelector } from "../state/store";
+import AddCell from "./add-cell";
 import CellListItem from "./cell-list-item";
 
 
@@ -9,22 +10,19 @@ const CellList: React.FC = () => {
             return data[id]
         })
     })
-    const dispatch = useAppDispatch()
 
-    const test =  () => {
-        dispatch(cellInsertedBefore({id:null,type:"code"}))
-    }
-    const test2 =  () => {
-        dispatch(cellInsertedBefore({id:null,type:"text"}))
-    }
-
-
-    const renderedCells = cells.map(cell => <CellListItem key={cell.id} cell={cell} />)
+    const renderedCells = cells.map(cell => {
+        if (cell) {
+            return <Fragment key={cell.id}>
+            <AddCell nextCellId={cell.id}/>
+            <CellListItem  cell={cell} />
+            </Fragment>
+        } 
+    })
 
     return <div>
-        <button onClick={test}>code</button>
-        <button onClick={test2}>text</button>
         {renderedCells}
+        <AddCell forceVisible={cells.length ===0} nextCellId={null}/>
         </div>;
 };
 
