@@ -1,12 +1,12 @@
-import { cellInsertedBefore } from '../state/feature/cellSlice';
+import { cellInsertedAfter } from '../state/feature/cellSlice';
 import { useAppDispatch } from '../state/store';
 import './add-cell.css';
 interface Props {
-    nextCellId: string | null;
+    previousCellId: string | null;
     forceVisible?:boolean 
 }
 
-const AddCell: React.FC<Props> = ({ nextCellId,forceVisible }) => {
+const AddCell: React.FC<Props> = ({ previousCellId,forceVisible }) => {
     const dispatch = useAppDispatch();
 
     return (
@@ -16,7 +16,7 @@ const AddCell: React.FC<Props> = ({ nextCellId,forceVisible }) => {
                     className="button is-rounded is-primary is-small"
                     onClick={() =>
                         dispatch(
-                            cellInsertedBefore({ id: nextCellId, type: 'code' })
+                            cellInsertedAfter({ id: previousCellId, type: 'code' })
                         )
                     }
                 >
@@ -29,7 +29,7 @@ const AddCell: React.FC<Props> = ({ nextCellId,forceVisible }) => {
                     className="button is-rounded is-primary is-small"
                     onClick={() =>
                         dispatch(
-                            cellInsertedBefore({ id: nextCellId, type: 'text' })
+                            cellInsertedAfter({ id: previousCellId, type: 'text' })
                         )
                     }
                 >

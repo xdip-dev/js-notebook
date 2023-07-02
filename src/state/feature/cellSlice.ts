@@ -1,7 +1,7 @@
 // import { ActionType } from '../action-types';
 // import { Action } from '../actions';
 import { Cell, CellTypes } from '../cell';
-import { createSlice,  PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Direction } from '../direction';
 
 interface CellsStates {
@@ -38,7 +38,7 @@ export const cellReducer = createSlice({
         cellMoved(
             state,
             action: PayloadAction<{ id: string; direction: Direction }>
-            ) {
+        ) {
             const { direction } = action.payload;
             const index = state.order.findIndex(
                 (id) => id === action.payload.id
@@ -49,9 +49,8 @@ export const cellReducer = createSlice({
             }
             state.order[index] = state.order[targetIndex];
             state.order[targetIndex] = action.payload.id;
-
         },
-        cellInsertedBefore(
+        cellInsertedAfter(
             state,
             action: PayloadAction<{ id: string | null; type: CellTypes }>
         ) {
@@ -66,9 +65,9 @@ export const cellReducer = createSlice({
                 (id) => id === action.payload.id
             );
             if (index < 0) {
-                state.order.push(cell.id);
+                state.order.unshift(cell.id);
             } else {
-                state.order.splice(index, 0, cell.id);
+                state.order.splice(index + 1, 0, cell.id);
             }
         },
     },
@@ -78,7 +77,7 @@ const randomId = () => {
     return Math.random().toString(36).substring(2, 5);
 };
 
-export const { cellDeleted, cellInsertedBefore, cellMoved, cellUpdated } =
+export const { cellDeleted, cellInsertedAfter, cellMoved, cellUpdated } =
     cellReducer.actions;
 
 export default cellReducer.reducer;
