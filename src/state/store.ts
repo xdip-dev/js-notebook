@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cellReducer from './feature/cellSlice'
+import bundleReducer from './feature/bundleSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import type {TypedUseSelectorHook} from 'react-redux'
 
 export const store = configureStore({ 
     reducer:{
-        cell:cellReducer
+        cell:cellReducer,
+        bundler:bundleReducer
     } })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

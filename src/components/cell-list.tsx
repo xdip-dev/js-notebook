@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useAppSelector } from "../state/store";
 import AddCell from "./add-cell";
 import CellListItem from "./cell-list-item";
+import './cell-list.css'
 
 
 const CellList: React.FC = () => {
@@ -20,7 +21,7 @@ const CellList: React.FC = () => {
         } 
     })
 
-    return <div>
+    return <div className="cell-list">
         <AddCell forceVisible={cells.length ===0} previousCellId={null}/>
         {renderedCells}
         </div>;
