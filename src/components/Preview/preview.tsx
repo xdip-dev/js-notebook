@@ -11,7 +11,6 @@ const html = `
         <style>
             html {
                 background-color: white;
-                color: red;
             }
         </style>
     </head>

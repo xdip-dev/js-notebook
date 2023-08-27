@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { useAppSelector } from "../state/store";
-import AddCell from "./add-cell";
+import { useAppSelector } from "../../../state/store";
+import AddCell from "../add-cell/add-cell";
 import CellListItem from "./cell-list-item";
 import './cell-list.css'
 

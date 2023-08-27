@@ -1,5 +1,5 @@
-import { cellInsertedAfter } from '../state/feature/cellSlice';
-import { useAppDispatch } from '../state/store';
+import { cellInsertedAfter } from '../../../state/feature/cellSlice';
+import { useAppDispatch } from '../../../state/store';
 import './add-cell.css';
 interface Props {
     previousCellId: string | null;

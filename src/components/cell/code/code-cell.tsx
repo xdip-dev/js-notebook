@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import CodeEditor from './code-editor';
-import Preview from './preview';
-import Resizable from './resizable';
-import bundler from '../bundler';
-import { Cell } from '../state/cell';
-import { useAppDispatch, useAppSelector } from '../state/store';
-import { cellUpdated } from '../state/feature/cellSlice';
-import { bundleComplete, bundleStarted } from '../state/feature/bundleSlice';
+import CodeEditor from './../editor/code-editor';
+import Preview from './../../Preview/preview';
+import Resizable from './../../Resize/resizable';
+import bundler from '../../../bundler';
+import { Cell } from '../../../state/cell';
+import { useAppDispatch, useAppSelector } from '../../../state/store';
+import { cellUpdated } from '../../../state/feature/cellSlice';
+import { bundleComplete, bundleStarted } from '../../../state/feature/bundleSlice';
 import './code-cell.css';
-import { useCumulativeCode } from '../hooks/use-cumulative-code';
+import { useCumulativeCode } from '../../../hooks/use-cumulative-code';
 
 interface CodeCellProps {
     cell: Cell;

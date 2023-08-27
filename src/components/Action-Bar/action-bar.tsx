@@ -1,5 +1,5 @@
-import { cellDeleted, cellMoved } from '../state/feature/cellSlice';
-import { useAppDispatch } from '../state/store';
+import { cellDeleted, cellMoved } from '../../state/feature/cellSlice';
+import { useAppDispatch } from '../../state/store';
 import './action-bar.css'
 
 interface Props {
